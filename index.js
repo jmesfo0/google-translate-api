@@ -12,27 +12,27 @@ function translate (text, opts, gotopts)
    // eslint-disable-next-line no-param-reassign
    gotopts = gotopts || {};
    // eslint-disable-next-line init-declarations
-   let error;
+   let e;
    [opts.from, opts.to].forEach(function (lang)
    {
 
       if (lang && !languages.isSupported(lang))
       {
 
-         error = new Error();
-         error.code = 400;
-         error.message = `The language '${lang}' is not supported`;
+         e = new Error();
+         e.code = 400;
+         e.message = `The language '${lang}' is not supported`;
 
       }
 
    });
-   if (error)
+   if (e)
    {
 
-      return new Promise(function result (resolve, reject)
+      return new Promise(function (resolve, reject)
       {
 
-         reject(error);
+         reject(e);
 
       });
 
@@ -63,29 +63,25 @@ function translate (text, opts, gotopts)
 
    url = `${url}?${querystring.stringify(data)}`;
 
-   return got(url, gotopts).then(function url (res)
+   return got(url, gotopts).then(function (res)
    {
 
-      const result =
-         {
-            "text": "",
-            "pronunciation": "",
-            "from":
-            {
-               "language":
-               {
-                  "didYouMean": false,
-                  "iso": ""
-               },
-               "text":
-               {
-                  "autoCorrected": false,
-                  "value": "",
-                  "didYouMean": false
-               }
+      const result = {
+         "text": "",
+         "pronunciation": "",
+         "from": {
+            "language": {
+               "didYouMean": false,
+               "iso": ""
             },
-            "raw": ""
-         };
+            "text": {
+               "autoCorrected": false,
+               "value": "",
+               "didYouMean": false
+            }
+         },
+         "raw": ""
+      };
 
       if (opts.raw)
       {
@@ -146,8 +142,7 @@ function translate (text, opts, gotopts)
       return result;
 
    }).
-      catch(function error (err)
-
+      catch(function (err)
       {
 
          err.message += `\nUrl: ${url}`;
