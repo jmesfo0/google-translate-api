@@ -1,11 +1,10 @@
 {
   "parserOptions": {
-      "ecmaVersion": 6
+      "ecmaVersion": 11
   },
   "env": {
       "browser": false,
-      "node": true,
-      "es6": true
+      "node": true
   },
   //"extends": "eslint:recommended",
   "extends": "eslint:all",
@@ -17,7 +16,6 @@
     "new-parens": "error",
     "no-lonely-if": "error",
     "no-multi-assign": "error",
-    "no-undef": "error",
     "curly": "error",
     "dot-notation": "error",
     "no-alert": "error",
@@ -86,6 +84,7 @@
     "no-console": "off",
     "camelcase": "off",
     "no-dupe-keys": "off",
+    "no-undef": "off",
     // -----------------------------
     // eslint all override defaults
     // -----------------------------
@@ -99,6 +98,7 @@
     "prefer-destructuring": ["error", {"object": false, "array": false}],
     "no-undefined": "off",
     "func-style": "off",
+    "func-names": "off",
     "no-shadow": "off",
     "array-bracket-newline": "off",
     "array-element-newline": "off",
@@ -123,6 +123,7 @@
     // ---------------------
     "require-unicode-regexp": "off",
     "prefer-named-capture-group": "off",
-    "prefer-regex-literals": "off" 
+    "prefer-regex-literals": "off",
+    "sort-keys":"off" 
   }
 }

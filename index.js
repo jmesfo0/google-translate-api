@@ -7,29 +7,32 @@ const languages = require("./languages");
 function translate (text, opts, gotopts)
 {
 
+   // eslint-disable-next-line no-param-reassign
    opts = opts || {};
+   // eslint-disable-next-line no-param-reassign
    gotopts = gotopts || {};
-   let e;
+   // eslint-disable-next-line init-declarations
+   let error;
    [opts.from, opts.to].forEach(function (lang)
    {
 
       if (lang && !languages.isSupported(lang))
       {
 
-         e = new Error();
-         e.code = 400;
-         e.message = "The language '" + lang + "' is not supported";
+         error = new Error();
+         error.code = 400;
+         error.message = `The language '${lang}' is not supported`;
 
       }
 
    });
-   if (e)
+   if (error)
    {
 
       return new Promise(function result (resolve, reject)
       {
 
-         reject(e);
+         reject(error);
 
       });
 
@@ -42,7 +45,7 @@ function translate (text, opts, gotopts)
    opts.from = languages.getCode(opts.from);
    opts.to = languages.getCode(opts.to);
 
-   let url = "https://translate.google." + opts.tld + "/translate_a/t";
+   let url = `https://translate.google.${opts.tld}/translate_a/t`;
    const data = {
       "client": opts.client || "dict-chrome-ex",
       "sl": opts.from,
@@ -58,9 +61,9 @@ function translate (text, opts, gotopts)
       "q": text
    };
 
-   url = url + "?" + querystring.stringify(data);
+   url = `${url}?${querystring.stringify(data)}`;
 
-   return got(url, gotopts).then(function (res)
+   return got(url, gotopts).then(function url (res)
    {
 
       const result =
@@ -135,7 +138,7 @@ function translate (text, opts, gotopts)
 
          result.from.text.value = str;
 
-            // result.from.text.autoCorrected is always false using '/translate_a/t'
+         // Result.from.text.autoCorrected is always false using '/translate_a/t'
          result.from.text.didYouMean = true;
 
       }
@@ -143,26 +146,26 @@ function translate (text, opts, gotopts)
       return result;
 
    }).
-   catch(function error (err)
+      catch(function error (err)
 
-   {
-
-      err.message += `\nUrl: ${url}`;
-      if (err.statusCode !== undefined && err.statusCode !== 200)
       {
 
-         err.code = "BAD_REQUEST";
+         err.message += `\nUrl: ${url}`;
+         if (err.statusCode !== undefined && err.statusCode !== 200)
+         {
 
-      }
-      else
-      {
+            err.code = "BAD_REQUEST";
 
-         err.code = "BAD_NETWORK";
+         }
+         else
+         {
 
-      }
-      throw err;
+            err.code = "BAD_NETWORK";
 
-   });
+         }
+         throw err;
+
+      });
 
 }
 
