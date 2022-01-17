@@ -137,7 +137,7 @@ function getCode (desiredLang)
 
    }
 
-   const keys = Object.keys(langs).filter(function (key)
+   const key_ = Object.keys(langs).find(function (key)
    {
 
       if (typeof langs[key] !== "string")
@@ -151,7 +151,7 @@ function getCode (desiredLang)
 
    });
 
-   return keys[0] || false;
+   return key_ || false;
 
 }
 

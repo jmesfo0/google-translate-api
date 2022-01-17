@@ -1,4 +1,4 @@
-/* eslint-disable no-plusplus */
+
 const test = require("ava");
 const Configstore = require("configstore");
 const languages = require("./languages.js");
@@ -181,11 +181,11 @@ test("try to translate from an unsupported language", async (t) =>
       t.fail();
 
    }
-   catch (err)
+   catch (error)
    {
 
-      t.is(err.code, 400);
-      t.is(err.message, "The language 'js' is not supported");
+      t.is(error.code, 400);
+      t.is(error.message, "The language 'js' is not supported");
 
    }
 
@@ -202,11 +202,11 @@ test("try to translate to an unsupported language", async (t) =>
       t.fail();
 
    }
-   catch (err)
+   catch (error)
    {
 
-      t.is(err.code, 400);
-      t.is(err.message, "The language 'js' is not supported");
+      t.is(error.code, 400);
+      t.is(error.message, "The language 'js' is not supported");
 
    }
 

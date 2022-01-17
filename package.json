@@ -4,7 +4,7 @@
   "description": "A free and unlimited API for Google Translate",
   "main": "index.js",
   "scripts": {
-    "test": "xo && nyc ava",
+    "test": "nyc ava --reporter=text-lcov",
     "coverage": "nyc report --reporter=text-lcov | coveralls && nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "release": "npm test && npm version $VER && npm publish",
     "postrelease": "git push --follow-tags --no-verify",
@@ -36,22 +36,22 @@
   "homepage": "https://github.com/RitaBot-Project/google-translate-api#readme",
   "dependencies": {
     "configstore": "^5.0.1",
-    "got": "^9.6.0"
+    "got": "^11.8.3"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.23.0",
     "@typescript-eslint/parser": "^4.23.0",
-    "ava": "^3.15.0",
+    "ava": "^4.0.1",
     "babel-eslint": "^10.1.0",
-    "codecov": "^3.8.1",
-    "coveralls": "^2.11.11",
+    "codecov": "^3.8.3",
+    "coveralls": "^2.13.3",
     "eslint": "^7.26.0",
-    "husky": "^6.0.0",
+    "husky": "^7.0.4",
     "nyc": "^15.1.0",
-    "xo": "^0.40.1"
+    "xo": "^0.45.0"
   },
   "xo": {
-    "space": 4,
+    "space": 3,
     "parserOptions": {
       "ecmaScript": 12
     }

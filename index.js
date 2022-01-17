@@ -128,17 +128,24 @@ function translate (text, opts, gotopts)
       {
 
          let str = body.spell.spell_html_res;
-        if (str){
-         str = str.replace(/<b><i>/g, "[");
-         str = str.replace(/<\/i><\/b>/g, "]");
+         if (str)
+         {
 
-         result.from.text.value = str;
+            str = str.replace(/<b><i>/g, "[");
+            str = str.replace(/<\/i><\/b>/g, "]");
 
-         // Result.from.text.autoCorrected is always false using '/translate_a/t'
-         result.from.text.didYouMean = true;
-        } else {
+            result.from.text.value = str;
+
+            // Result.from.text.autoCorrected is always false using '/translate_a/t'
+            result.from.text.didYouMean = true;
+
+         }
+         else
+         {
+
             result.from.text.didYouMean = false;
-        }
+
+         }
 
       }
 
