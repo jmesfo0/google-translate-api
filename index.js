@@ -33,6 +33,7 @@ function translate(text, opts, gotopts) {
     opts.from = opts.from || 'auto';
     opts.to = opts.to || 'en';
     opts.tld = opts.tld || 'com';
+    opts.useAdvice = opts.useAdvice;
 
     opts.from = languages.getCode(opts.from);
     opts.to = languages.getCode(opts.to);
@@ -54,7 +55,7 @@ function translate(text, opts, gotopts) {
         return data;
     }).then(function (data) {
         url = url + '/_/TranslateWebserverUi/data/batchexecute?' + querystring.stringify(data);
-        gotopts.body = 'f.req=' + encodeURIComponent(JSON.stringify([[['MkEWBc', JSON.stringify([[text, opts.from, opts.to, true], [null]]), null, 'generic']]])) + '&';
+        gotopts.body = 'f.req=' + encodeURIComponent(JSON.stringify([[['MkEWBc', JSON.stringify([[text, opts.from, opts.to, opts.useAdvice], [null]]), null, 'generic']]])) + '&';
         gotopts.headers['content-type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
 
         return got.post(url, gotopts).then(function (res) {

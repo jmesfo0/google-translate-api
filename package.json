@@ -1,6 +1,6 @@
 {
   "name": "rita-google-translate-api",
-  "version": "3.2.0-alpha",
+  "version": "3.2.0-alpha.1",
   "description": "A free and unlimited API for Google Translate",
   "main": "index.js",
   "scripts": {
