@@ -27,14 +27,22 @@ test('translate from auto to dutch', async t => {
     t.false(res.from.language.didYouMean);
     t.is(res.from.language.iso, 'en');
     t.false(res.from.text.autoCorrected);
-    t.is(res.from.text.value, '');
-    t.false(res.from.text.didYouMean);
+});
+
+test('translate several sentences with spaces (#73)', async t => {
+    const res = await translate(
+        'translator, translator. translator! translator? translator,translator.translator!translator?',
+        {from: 'auto', to: 'nl'}
+    );
+
+    t.is(res.text, 'vertaler, vertaler. vertaler! vertaler? Vertaler, vertaler.translator! Vertaler?');
 });
 
 test('test pronunciation', async t => {
     const res = await translate('translator', {from: 'auto', to: 'zh-CN'});
 
-    t.is(res.pronunciation, 'Yì zhě');
+    // here can be 2 variants: 'Yì zhě', 'Fānyì'
+    t.regex(res.pronunciation, /^(Yì zhě)|(Fānyì)$/);
 });
 
 test('translate some english text setting the source language as portuguese', async t => {
