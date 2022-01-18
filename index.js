@@ -155,6 +155,7 @@ function translate (text, opts, gotopts)
       catch(function (err)
       {
 
+         err.error = true;
          err.message += `\nUrl: ${url}`;
          if (err.statusCode !== undefined && err.statusCode !== 200)
          {
@@ -168,7 +169,7 @@ function translate (text, opts, gotopts)
             err.code = "BAD_NETWORK";
 
          }
-         throw err;
+         return err;
 
       });
 
