@@ -92,6 +92,9 @@ function translate (text, opts, gotopts)
 
       const body = JSON.parse(res.body);
 
+      if(typeof body.sentences === 'undefined') { result.text += body; }
+      else {
+
       body.sentences.forEach(function (obj)
       {
 
@@ -107,10 +110,11 @@ function translate (text, opts, gotopts)
             result.pronunciation += obj.translit;
 
          }
-
       });
 
-      if (body.src === body.ld_result.srclangs[0])
+     }
+
+      if (typeof body.src !== 'undefined' && body.src === body.ld_result.srclangs[0])
       {
 
          result.from.language.iso = body.ld_result.srclangs[0];
@@ -118,11 +122,11 @@ function translate (text, opts, gotopts)
       }
       else
       {
-
+         result.from.language.iso = opts.from;
          result.from.language.didYouMean = true;
-         result.from.language.iso = body.ld_result.srclangs[0];
 
       }
+
 
       if (body.spell)
       {
