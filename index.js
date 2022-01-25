@@ -91,19 +91,6 @@ function translate (text, opts, gotopts)
       }
 
       const body = JSON.parse(res.body);
-      function isIterable (input)
-      {
-
-         if (input === null || input === undefined)
-         {
-
-            return false;
-
-         }
-
-         return typeof input[Symbol.iterator] === "function";
-
-      }
 
       body.sentences.forEach(function (obj)
       {
@@ -118,13 +105,6 @@ function translate (text, opts, gotopts)
          {
 
             result.pronunciation += obj.translit;
-
-         }
-         if (!isIterable(body.sentences))
-         {
-
-            console.log(res.body);
-            console.log(body);
 
          }
 
