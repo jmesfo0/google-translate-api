@@ -104,10 +104,14 @@ function translate (text, opts, gotopts)
             result.text = body[0];
             result.from.language.iso = opts.from;
             result.from.text.value = text;
+
+            // return result;
+
             // Return result;]
             obj = await translaterpc(text, opts);
             obj.text = result.text;
             return obj;
+
 
          }
          throw new Error("Bad response body!");
@@ -178,7 +182,7 @@ function translate (text, opts, gotopts)
       {
 
          err.error = true;
-         err.message += `\nUrl: ${url}`;
+         err.message += `\nERROR: Url: ${url}`;
          if (err.statusCode !== undefined && err.statusCode !== 200)
          {
 
@@ -191,7 +195,7 @@ function translate (text, opts, gotopts)
             err.code = "BAD_NETWORK";
 
          }
-         return err;
+         throw err;
 
       });
 
