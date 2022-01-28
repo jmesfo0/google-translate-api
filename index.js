@@ -92,29 +92,36 @@ function translate (text, opts, gotopts)
 
       const body = JSON.parse(res.body);
 
-      if(typeof body.sentences === 'undefined') { result.text += body; }
-      else {
-
-      body.sentences.forEach(function (obj)
+      if (typeof body.sentences === "undefined")
       {
 
-         if (obj.trans)
+         result.text += body;
+
+      }
+      else
+      {
+
+         body.sentences.forEach(function (obj)
          {
 
-            result.text += obj.trans;
+            if (obj.trans)
+            {
 
-         }
-         if (obj.translit)
-         {
+               result.text += obj.trans;
 
-            result.pronunciation += obj.translit;
+            }
+            if (obj.translit)
+            {
 
-         }
-      });
+               result.pronunciation += obj.translit;
 
-     }
+            }
 
-      if (typeof body.src !== 'undefined' && body.src === body.ld_result.srclangs[0])
+         });
+
+      }
+
+      if (typeof body.src !== "undefined" && body.src === body.ld_result.srclangs[0])
       {
 
          result.from.language.iso = body.ld_result.srclangs[0];
@@ -122,6 +129,7 @@ function translate (text, opts, gotopts)
       }
       else
       {
+
          result.from.language.iso = opts.from;
          result.from.language.didYouMean = true;
 
