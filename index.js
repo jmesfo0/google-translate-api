@@ -1,11 +1,14 @@
+/* eslint-disable linebreak-style */
 const querystring = require("querystring");
 
 const got = require("got");
-
+const translaterpc = require("@vitalets/google-translate-api");
 const languages = require("./languages");
 
 function translate (text, opts, gotopts)
 {
+
+   let obj = {};
 
    // eslint-disable-next-line no-param-reassign
    opts = opts || {};
@@ -63,7 +66,7 @@ function translate (text, opts, gotopts)
 
    url = `${url}?${querystring.stringify(data)}`;
 
-   return got(url, gotopts).then(function (res)
+   return got(url, gotopts).then(async function (res)
    {
 
       const result = {
@@ -101,7 +104,14 @@ function translate (text, opts, gotopts)
             result.text = body[0];
             result.from.language.iso = opts.from;
             result.from.text.value = text;
-            return result;
+
+            // return result;
+
+            // Return result;]
+            obj = await translaterpc(text, opts);
+            obj.text = result.text;
+            return obj;
+
 
          }
          throw new Error("Bad response body!");
