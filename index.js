@@ -92,14 +92,20 @@ function translate (text, opts, gotopts)
 
       const body = JSON.parse(res.body);
 
-      if (typeof body.sentences === "undefined") {
-         if (Array.isArray(body)) {
+      if (typeof body.sentences === "undefined")
+      {
+
+         if (Array.isArray(body))
+         {
+
             result.text = body[0];
             result.from.language.iso = opts.from;
             result.from.text.value = text;
             return result;
+
          }
          throw new Error("Bad response body!");
+
       }
 
       body.sentences.forEach(function (obj)
@@ -166,7 +172,7 @@ function translate (text, opts, gotopts)
       {
 
          err.error = true;
-         err.message += `\nUrl: ${url}`;
+         err.message += `\nERROR: Url: ${url}`;
          if (err.statusCode !== undefined && err.statusCode !== 200)
          {
 
@@ -179,7 +185,7 @@ function translate (text, opts, gotopts)
             err.code = "BAD_NETWORK";
 
          }
-         return err;
+         throw err;
 
       });
 
