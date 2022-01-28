@@ -179,7 +179,7 @@ function translate (text, opts, gotopts)
             err.code = "BAD_NETWORK";
 
          }
-         return err;
+         return console.error(JSON.stringify(err));
 
       });
 
