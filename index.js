@@ -110,6 +110,7 @@ function translate (text, opts, gotopts)
             // Return result;]
             obj = await translaterpc(text, opts);
             obj.text = result.text;
+            console.log("---\nI had to use Artanis's method to detect lang\n---");
             return obj;
 
 
