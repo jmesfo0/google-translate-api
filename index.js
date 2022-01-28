@@ -105,7 +105,7 @@ function translate (text, opts, gotopts)
             result.from.language.iso = opts.from;
             result.from.text.value = text;
             // Return result;]
-            obj = await translaterpc("replace", opts);
+            obj = await translaterpc(text, opts);
             obj.text = result.text;
             return obj;
 
