@@ -1,4 +1,3 @@
-/* eslint-disable capitalized-comments */
 const querystring = require("querystring");
 
 const got = require("got");
@@ -94,29 +93,12 @@ function translate (text, opts, gotopts)
       const body = JSON.parse(res.body);
 
       // Retry if Google returns garbage
-      // Fix provided by vkedwardli: https://github.com/vkedwardli
       if (typeof body.sentences === "undefined")
       {
 
          return translate(text, opts, gotopts);
 
       }
-
-      // if (typeof body.sentences === "undefined")
-      // {
-
-      //    if (Array.isArray(body))
-      //    {
-
-      //       result.text = body[0];
-      //       result.from.language.iso = opts.from;
-      //       result.from.text.value = text;
-      //       return result;
-
-      //    }
-      //    throw new Error("Bad response body!");
-
-      // }
 
       body.sentences.forEach(function (obj)
       {
@@ -154,24 +136,14 @@ function translate (text, opts, gotopts)
       {
 
          let str = body.spell.spell_html_res;
-         if (str)
-         {
 
-            str = str.replace(/<b><i>/g, "[");
-            str = str.replace(/<\/i><\/b>/g, "]");
+         str = str.replace(/<b><i>/g, "[");
+         str = str.replace(/<\/i><\/b>/g, "]");
 
-            result.from.text.value = str;
+         result.from.text.value = str;
 
-            // Result.from.text.autoCorrected is always false using '/translate_a/t'
-            result.from.text.didYouMean = true;
-
-         }
-         else
-         {
-
-            result.from.text.didYouMean = false;
-
-         }
+         // Result.from.text.autoCorrected is always false using '/translate_a/t'
+         result.from.text.didYouMean = true;
 
       }
 
@@ -181,8 +153,7 @@ function translate (text, opts, gotopts)
       catch(function (err)
       {
 
-         err.error = true;
-         err.message += `\nERROR: Url: ${url}`;
+         err.message += `\nUrl: ${url}`;
          if (err.statusCode !== undefined && err.statusCode !== 200)
          {
 
