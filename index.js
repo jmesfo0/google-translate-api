@@ -1,3 +1,4 @@
+/* eslint-disable capitalized-comments */
 const querystring = require("querystring");
 
 const got = require("got");
@@ -92,21 +93,30 @@ function translate (text, opts, gotopts)
 
       const body = JSON.parse(res.body);
 
+      // Retry if Google returns garbage
+      // Fix provided by vkedwardli: https://github.com/vkedwardli
       if (typeof body.sentences === "undefined")
       {
 
-         if (Array.isArray(body))
-         {
-
-            result.text = body[0];
-            result.from.language.iso = opts.from;
-            result.from.text.value = text;
-            return result;
-
-         }
-         throw new Error("Bad response body!");
+         return translate(text, opts, gotopts);
 
       }
+
+      // if (typeof body.sentences === "undefined")
+      // {
+
+      //    if (Array.isArray(body))
+      //    {
+
+      //       result.text = body[0];
+      //       result.from.language.iso = opts.from;
+      //       result.from.text.value = text;
+      //       return result;
+
+      //    }
+      //    throw new Error("Bad response body!");
+
+      // }
 
       body.sentences.forEach(function (obj)
       {
