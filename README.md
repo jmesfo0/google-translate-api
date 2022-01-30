@@ -136,3 +136,6 @@ Otherwise, it will be an empty `string` (`''`).
 ## Related
 
 - [`vertaler`](https://github.com/matheuss/vertaler) – CLI for this module
+
+## License
+MIT © Matheus Fernandes, forked and maintained by Vitaliy Potapov and (vkedwardli)[https://github.com/vkedwardli]
